@@ -9,3 +9,7 @@ extension WidgetX on Widget {
 extension ObjectWidgetX on Object? {
   Widget get text => Text(toString());
 }
+
+extension StringX on String {
+  String get capitalize => characters.first.toUpperCase() + substring(1);
+}

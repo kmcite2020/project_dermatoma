@@ -3,6 +3,8 @@ import 'package:project_dermatoma/src/features/settings/themes/themes_bloc.dart'
 import 'package:project_dermatoma/src/shared/extensions.dart';
 import 'package:states_rebuilder/scr/state_management/rm.dart';
 
+import '../../home/blocs/patients_bloc.dart';
+
 class SettingsPage extends ReactiveStatelessWidget {
   const SettingsPage({super.key});
 
@@ -12,20 +14,38 @@ class SettingsPage extends ReactiveStatelessWidget {
       appBar: AppBar(),
       body: ListView(
         children: [
-          ListTile(
-            title: "Switch Theme Mode".text,
-            subtitle: themeMode.text,
-            trailing: DropdownButton(
-                value: themeMode,
-                items: ThemeMode.values
-                    .map(
-                      (e) => DropdownMenuItem(value: e, child: e.name.text),
-                    )
-                    .toList(),
-                onChanged: (_) {
-                  themeModeRM.state = _!;
-                }),
-          )
+          DropdownButtonFormField(
+            decoration: const InputDecoration(labelText: "Theme Mode"),
+            value: themeMode,
+            items: ThemeMode.values.map(
+              (e) {
+                return DropdownMenuItem(value: e, child: e.name.capitalize.text);
+              },
+            ).toList(),
+            onChanged: (_) {
+              themeModeRM.state = _!;
+            },
+          ).pad,
+          ElevatedButton(
+            onPressed: () {},
+            child: 'BACKUP ALL DATA LOCALLY'.text,
+          ).pad,
+          ElevatedButton(
+            onPressed: () {},
+            child: 'RESTORE DATA FROM BACKUP'.text,
+          ).pad,
+          ElevatedButton(
+            onPressed: () {},
+            child: 'GOTO ARCHIVES'.text,
+          ).pad,
+          ElevatedButton(
+            onPressed: () {},
+            child: 'CLEAR ALL ARCHIVES'.text,
+          ).pad,
+          ElevatedButton(
+            onPressed: patients.isEmpty ? null : () => deleteAllPatients(),
+            child: 'DELETE ALL PATIENTS'.text,
+          ).pad,
         ],
       ),
     );

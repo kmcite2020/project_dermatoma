@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "name": "DERMATOMA",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib\\main.dart"
+        }
+    ]
+}

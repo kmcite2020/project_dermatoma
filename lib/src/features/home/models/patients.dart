@@ -7,9 +7,7 @@ import 'patient.dart';
 
 class Patients {
   final List<Patient> patients;
-  Patients({
-    required this.patients,
-  });
+  Patients({required this.patients});
 
   Patients copyWith({
     List<Patient>? patients,
@@ -27,7 +25,9 @@ class Patients {
     return Patients(
       patients: List<Patient>.from(
         (map['patients']).map<Patient>(
-          (x) => Patient.fromMap(x as Map<String, dynamic>),
+          (x) {
+            return Patient.fromMap(x as Map<String, dynamic>);
+          },
         ),
       ),
     );

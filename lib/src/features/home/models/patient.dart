@@ -1,45 +1,93 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
+import 'package:project_dermatoma/src/features/home/models/gender.dart';
+import 'package:project_dermatoma/src/features/home/models/pictures.dart';
 
-class Patient {
-  final String name;
-  final int mr;
-  final List<String> histories;
+import 'bio.dart';
+import 'contact.dart';
+import 'medical_record.dart';
+
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+
+// Add pt.
+// Name
+// Age
+// Gender
+// Address
+// Date
+// Contact
+// Medical record number
+// Id
+
+class Patient implements Bio {
+  @override
+  String address;
+
+  @override
+  String age;
+
+  @override
+  Contact contact;
+
+  @override
+  Gender gender;
+
+  @override
+  String name;
+  @override
+  MedicalRecord? medicalRecord;
+  PicturesModel picturesModel;
   Patient({
+    required this.address,
+    required this.age,
+    required this.contact,
+    required this.gender,
     required this.name,
-    required this.mr,
-    required this.histories,
+    required this.medicalRecord,
+    required this.picturesModel,
   });
 
   Patient copyWith({
+    String? address,
+    String? age,
+    Contact? contact,
+    Gender? gender,
     String? name,
-    int? mr,
-    List<String>? histories,
+    MedicalRecord? medicalRecord,
+    PicturesModel? picturesModel,
   }) {
     return Patient(
+      address: address ?? this.address,
+      age: age ?? this.age,
+      contact: contact ?? this.contact,
+      gender: gender ?? this.gender,
       name: name ?? this.name,
-      mr: mr ?? this.mr,
-      histories: histories ?? this.histories,
+      medicalRecord: medicalRecord ?? this.medicalRecord,
+      picturesModel: picturesModel ?? this.picturesModel,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'address': address,
+      'age': age,
+      'contact': contact.toMap(),
+      'gender': gender.toMap(),
       'name': name,
-      'mr': mr,
-      'histories': histories,
+      'medicalRecord': medicalRecord?.toMap(),
+      'picturesModel': picturesModel.toMap(),
     };
   }
 
   factory Patient.fromMap(Map<String, dynamic> map) {
     return Patient(
+      address: map['address'] as String,
+      age: map['age'] as String,
+      contact: Contact.fromMap(map['contact'] as Map<String, dynamic>),
+      gender: Gender.fromMap(map['gender']),
       name: map['name'] as String,
-      mr: map['mr'] as int,
-      histories: List<String>.from(
-        (map['histories']),
-      ),
+      medicalRecord: map['medicalRecord'] != null ? MedicalRecord.fromMap(map['medicalRecord'] as Map<String, dynamic>) : null,
+      picturesModel: PicturesModel.fromMap(map['picturesModel']),
     );
   }
 
@@ -48,15 +96,25 @@ class Patient {
   factory Patient.fromJson(String source) => Patient.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'Patient(name: $name, mr: $mr, histories: $histories)';
+  String toString() {
+    return 'Patient(address: $address, age: $age, contact: $contact, gender: $gender, name: $name, medicalRecord: $medicalRecord, picturesModel: $picturesModel)';
+  }
 
   @override
   bool operator ==(covariant Patient other) {
     if (identical(this, other)) return true;
 
-    return other.name == name && other.mr == mr && listEquals(other.histories, histories);
+    return other.address == address &&
+        other.age == age &&
+        other.contact == contact &&
+        other.gender == gender &&
+        other.name == name &&
+        other.medicalRecord == medicalRecord &&
+        other.picturesModel == picturesModel;
   }
 
   @override
-  int get hashCode => name.hashCode ^ mr.hashCode ^ histories.hashCode;
+  int get hashCode {
+    return address.hashCode ^ age.hashCode ^ contact.hashCode ^ gender.hashCode ^ name.hashCode ^ medicalRecord.hashCode ^ picturesModel.hashCode;
+  }
 }
