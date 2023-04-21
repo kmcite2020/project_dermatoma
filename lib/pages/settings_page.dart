@@ -11,19 +11,50 @@ class SettingsPage extends ReactiveStatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+        ],
+      ),
       body: ListView(
         children: [
-          DropdownButtonFormField(
-            decoration: const InputDecoration(labelText: "Theme Mode"),
-            value: themeBloc.themeMode,
-            items: ThemeMode.values.map(
-              (e) {
-                return DropdownMenuItem(value: e, child: e.name.capitalize.text);
-              },
-            ).toList(),
-            onChanged: themeBloc.updateThemeMode,
-          ).pad,
+          GridView.count(
+            shrinkWrap: true,
+            crossAxisCount: 2,
+            children: [
+              ThemeMode.light,
+              ThemeMode.dark,
+            ]
+                .map(
+                  (e) => ElevatedButton(
+                    onPressed: themeBloc.themeMode == e
+                        ? null
+                        : () {
+                            themeBloc.updateThemeMode(e);
+                          },
+                    child: e.name.toUpperCase().text,
+                  ).pad,
+                )
+                .toList(),
+          ),
+          Slider(
+            value: themeBloc.height,
+            onChanged: themeBloc.updateHeight,
+            min: ThemeBloc.minHeight,
+            max: ThemeBloc.maxHeight,
+          ),
+          Slider(
+            value: themeBloc.padding,
+            onChanged: themeBloc.updatePadding,
+            min: ThemeBloc.minPadding,
+            max: ThemeBloc.maxPadding,
+          ),
+          Slider(
+            value: themeBloc.borderRadius,
+            onChanged: themeBloc.updateBorderRadius,
+            min: ThemeBloc.minBorderRadius,
+            max: ThemeBloc.maxBorderRadius,
+          ),
           ElevatedButton(
             onPressed: () {},
             child: 'BACKUP ALL DATA LOCALLY'.text,

@@ -3,6 +3,7 @@ import 'package:project_dermatoma/shared/extensions.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 import '../blocs/patients_bloc.dart';
+import 'add_patient_page.dart';
 import 'edit_patient_page.dart';
 
 class HomePage extends ReactiveStatelessWidget {
@@ -94,6 +95,12 @@ class HomePage extends ReactiveStatelessWidget {
             ],
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          RM.navigate.to(const AddPatientPage());
+        },
+        label: 'ADD PATIENTS'.text,
       ),
     );
   }

@@ -15,18 +15,20 @@ class SearchPage extends ReactiveStatelessWidget {
       appBar: AppBar(
         title: TextFormField(
           controller: currentSearchTextRM.controller,
-          decoration: InputDecoration(
-            filled: true,
-            border: const OutlineInputBorder(
-              borderSide: BorderSide.none,
-            ),
-            suffixIcon: IconButton(
-              onPressed: () => searchFunction(currentSearchTextRM.text),
-              icon: const Icon(Icons.search),
-            ),
+          decoration: const InputDecoration(
+            filled: false,
+            border: OutlineInputBorder(borderSide: BorderSide.none),
           ),
           onChanged: searchFunction,
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              searchFunction(currentSearchTextRM.text);
+            },
+            icon: const Icon(Icons.search),
+          ),
+        ],
       ),
       body: ListView(
         children: [

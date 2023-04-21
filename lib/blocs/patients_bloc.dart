@@ -12,13 +12,17 @@ class PatientsBloc {
       key: 'patients',
       toJson: (s) => s.toJson(),
       fromJson: (json) => Patients.fromJson(json),
+      throttleDelay: 100,
     ),
   );
+  getAllPatients() => patients;
+  getPatients(int amount) => patients.take(amount);
+  getPatientAtIndex(int index) => patients[index];
 
   List<Patient> get patients => patientsRM.state.patients;
   set patients(List<Patient> value) {
     patientsRM.state = patientsRM.state.copyWith(patients: value);
-    patientsRM.stateAsync;
+    // patientsRM.stateAsync;
   }
 
   void addPatient(Patient patient) => patients = [patient, ...patients];
