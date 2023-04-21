@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/material.dart';
-import 'package:project_dermatoma/src/blocs/main_bloc.dart';
-import 'package:project_dermatoma/src/shared/hive_storage.dart';
-import 'package:states_rebuilder/scr/state_management/rm.dart';
+import 'package:states_rebuilder/states_rebuilder.dart';
 
-import 'src/blocs/themes_bloc.dart';
+import 'blocs/main_bloc.dart';
+import 'blocs/themes_bloc.dart';
+import 'shared/hive_storage.dart';
 
 void main() async {
   await RM.storageInitializer(HiveStorage());

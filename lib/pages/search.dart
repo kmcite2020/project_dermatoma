@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:project_dermatoma/src/models/patient.dart';
-import 'package:project_dermatoma/src/pages/edit_patient_page.dart';
-import 'package:project_dermatoma/src/shared/extensions.dart';
+import 'package:project_dermatoma/models/patient.dart';
+import 'package:project_dermatoma/pages/edit_patient_page.dart';
+import 'package:project_dermatoma/shared/extensions.dart';
 import 'package:states_rebuilder/scr/state_management/rm.dart';
+
+import '../blocs/patients_bloc.dart';
 
 class SearchPage extends ReactiveStatelessWidget {
   const SearchPage({super.key});
@@ -45,9 +47,9 @@ class SearchPage extends ReactiveStatelessWidget {
 final searchRM = RM.inject(() => <Patient>[]);
 final currentSearchTextRM = RM.injectTextEditing();
 void searchFunction(value) {
-  // searchRM.state = patientsBloc.patients.patients.where(
-  //   (element) {
-  //     return element.name!.contains(value); // || element.address.contains(value);
-  //   },
-  // ).toList();
+  searchRM.state = patientsBloc.patients.where(
+    (element) {
+      return element.name!.contains(value); // || element.address.contains(value);
+    },
+  ).toList();
 }

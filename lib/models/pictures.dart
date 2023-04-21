@@ -3,7 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:project_dermatoma/src/models/picture.dart';
+import 'package:project_dermatoma/models/picture.dart';
 
 class PicturesModel {
   final List<PictureModel>? pictures;

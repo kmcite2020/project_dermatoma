@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:project_dermatoma/src/shared/extensions.dart';
+import 'package:project_dermatoma/shared/extensions.dart';
 import 'package:states_rebuilder/scr/state_management/rm.dart';
 
 class AddPatientPage extends ReactiveStatelessWidget {

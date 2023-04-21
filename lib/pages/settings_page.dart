@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:project_dermatoma/src/blocs/themes_bloc.dart';
-import 'package:project_dermatoma/src/shared/extensions.dart';
+import 'package:project_dermatoma/blocs/themes_bloc.dart';
+import 'package:project_dermatoma/shared/extensions.dart';
 import 'package:states_rebuilder/scr/state_management/rm.dart';
+
+import '../blocs/patients_bloc.dart';
 
 class SettingsPage extends ReactiveStatelessWidget {
   const SettingsPage({super.key});
@@ -38,10 +40,10 @@ class SettingsPage extends ReactiveStatelessWidget {
             onPressed: () {},
             child: 'CLEAR ALL ARCHIVES'.text,
           ).pad,
-          // ElevatedButton(
-          //   onPressed: patientsBloc.patients.patients.isEmpty ? null : () => patientsBloc.deleteAllPatients(),
-          //   child: 'DELETE ALL PATIENTS'.text,
-          // ).pad,
+          ElevatedButton(
+            onPressed: patientsBloc.patients.isEmpty ? null : () => patientsBloc.deleteAllPatients(),
+            child: 'DELETE ALL PATIENTS'.text,
+          ).pad,
         ],
       ),
     );

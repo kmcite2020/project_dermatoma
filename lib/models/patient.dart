@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:project_dermatoma/src/models/pictures.dart';
+import 'package:project_dermatoma/models/pictures.dart';
 
 class Patient {
   final String? name;
