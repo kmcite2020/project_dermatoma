@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
-import '../features/settings/blocs/settings.dart';
+import 'package:project_dermatoma/src/blocs/themes_bloc.dart';
 
 extension WidgetX on Widget {
-  Widget get pad => Padding(padding: EdgeInsets.all(padding), child: this);
+  Widget get pad => Padding(padding: EdgeInsets.all(themeBloc.padding), child: this);
 }
 
 extension ObjectWidgetX on Object? {

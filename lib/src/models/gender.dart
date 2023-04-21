@@ -3,5 +3,5 @@ enum Gender {
   female;
 
   int toMap() => index;
-  static Gender fromMap(map) => Gender.values[map];
+  static Gender fromMap(int map) => Gender.values[map];
 }

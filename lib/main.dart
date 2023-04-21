@@ -1,16 +1,15 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:flutter/material.dart';
-import 'package:project_dermatoma/src/features/home/pages/home_page.dart';
-import 'package:project_dermatoma/src/features/search.dart';
+import 'package:project_dermatoma/src/blocs/main_bloc.dart';
 import 'package:project_dermatoma/src/shared/hive_storage.dart';
-import 'package:states_rebuilder/scr/state_management/extensions/type_extensions.dart';
 import 'package:states_rebuilder/scr/state_management/rm.dart';
 
-import 'src/features/settings/pages/settings_page.dart';
-import 'src/features/settings/themes/themes_bloc.dart';
+import 'src/blocs/themes_bloc.dart';
 
 void main() async {
   await RM.storageInitializer(HiveStorage());
-  // await RM.deleteAllPersistState();
+  await RM.deleteAllPersistState();
   runApp(const MyApp());
 }
 
@@ -23,40 +22,22 @@ class MyApp extends ReactiveStatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: themeMode,
+      themeMode: themeBloc.themeMode,
       home: Scaffold(
-        body: pages[selectedIndex],
+        body: mainBloc.page,
         bottomNavigationBar: NavigationBar(
-          selectedIndex: selectedIndex,
-          destinations: labelsWithIcons
-              .map(
-                (List e) => NavigationDestination(
-                  icon: Icon(e[1]),
-                  label: e[0].toString(),
-                ),
-              )
-              .toList(),
-          onDestinationSelected: (value) {
-            selectedIndexRM.state = value;
-          },
+          selectedIndex: mainBloc.selectedIndex,
+          destinations: mainBloc.destinations.map(
+            (e) {
+              return NavigationDestination(
+                icon: Icon(mainBloc.icons[e]),
+                label: mainBloc.labels[e],
+              );
+            },
+          ).toList(),
+          onDestinationSelected: mainBloc.updateSelectedIndex,
         ),
       ),
     );
   }
 }
-
-final pages = [
-  const HomePage(),
-  const SearchPage(),
-  const SettingsPage(),
-];
-final labelsWithIcons = [
-  ["Home", Icons.home],
-  ["Search", Icons.search],
-  ["Settings", Icons.settings],
-];
-
-bool get isSearching => isSearchRM.state;
-final isSearchRM = false.inj();
-int get selectedIndex => selectedIndexRM.state;
-final selectedIndexRM = 0.inj();

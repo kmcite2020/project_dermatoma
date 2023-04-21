@@ -8,6 +8,5 @@ enum Site {
   hands,
   feet;
 
-  int toMap() => index;
-  Site fromMap(map) => Site.values[map];
+  Site fromMap(int map) => Site.values[map];
 }

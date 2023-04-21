@@ -2,19 +2,19 @@
 import 'dart:convert';
 
 class Patterns {
-  final bool localizedOrGeneralized;
-  final bool unilateralOrBilateral;
-  final bool symmetricalOrAssymetrical;
-  final bool truncalOrAcral;
-  final bool flexorOrExtensor;
-  final bool expsedOrCovered;
+  final bool? localizedOrGeneralized;
+  final bool? unilateralOrBilateral;
+  final bool? symmetricalOrAssymetrical;
+  final bool? truncalOrAcral;
+  final bool? flexorOrExtensor;
+  final bool? expsedOrCovered;
   Patterns({
-    required this.localizedOrGeneralized,
-    required this.unilateralOrBilateral,
-    required this.symmetricalOrAssymetrical,
-    required this.truncalOrAcral,
-    required this.flexorOrExtensor,
-    required this.expsedOrCovered,
+    this.localizedOrGeneralized,
+    this.unilateralOrBilateral,
+    this.symmetricalOrAssymetrical,
+    this.truncalOrAcral,
+    this.flexorOrExtensor,
+    this.expsedOrCovered,
   });
 
   Patterns copyWith({
@@ -48,12 +48,12 @@ class Patterns {
 
   factory Patterns.fromMap(Map<String, dynamic> map) {
     return Patterns(
-      localizedOrGeneralized: map['localizedOrGeneralized'] as bool,
-      unilateralOrBilateral: map['unilateralOrBilateral'] as bool,
-      symmetricalOrAssymetrical: map['symmetricalOrAssymetrical'] as bool,
-      truncalOrAcral: map['truncalOrAcral'] as bool,
-      flexorOrExtensor: map['flexorOrExtensor'] as bool,
-      expsedOrCovered: map['expsedOrCovered'] as bool,
+      localizedOrGeneralized: map['localizedOrGeneralized'] != null ? map['localizedOrGeneralized'] as bool : null,
+      unilateralOrBilateral: map['unilateralOrBilateral'] != null ? map['unilateralOrBilateral'] as bool : null,
+      symmetricalOrAssymetrical: map['symmetricalOrAssymetrical'] != null ? map['symmetricalOrAssymetrical'] as bool : null,
+      truncalOrAcral: map['truncalOrAcral'] != null ? map['truncalOrAcral'] as bool : null,
+      flexorOrExtensor: map['flexorOrExtensor'] != null ? map['flexorOrExtensor'] as bool : null,
+      expsedOrCovered: map['expsedOrCovered'] != null ? map['expsedOrCovered'] as bool : null,
     );
   }
 

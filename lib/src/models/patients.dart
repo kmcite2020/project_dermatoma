@@ -35,7 +35,10 @@ class Patients {
 
   String toJson() => json.encode(toMap());
 
-  factory Patients.fromJson(String source) => Patients.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Patients.fromJson(String? source) {
+    if (source == null) return Patients(patients: []);
+    return Patients.fromMap(json.decode(source) as Map<String, dynamic>);
+  }
 
   @override
   String toString() => 'Patients(patients: $patients)';

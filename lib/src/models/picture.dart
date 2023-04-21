@@ -2,11 +2,11 @@
 import 'dart:convert';
 
 class PictureModel {
-  final String picture;
-  final DateTime date;
+  final String? picture;
+  final DateTime? date;
   PictureModel({
-    required this.picture,
-    required this.date,
+    this.picture,
+    this.date,
   });
 
   PictureModel copyWith({
@@ -22,14 +22,14 @@ class PictureModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'picture': picture,
-      'date': date.millisecondsSinceEpoch,
+      'date': date?.millisecondsSinceEpoch,
     };
   }
 
   factory PictureModel.fromMap(Map<String, dynamic> map) {
     return PictureModel(
-      picture: map['picture'] as String,
-      date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
+      picture: map['picture'] != null ? map['picture'] as String : null,
+      date: map['date'] != null ? DateTime.fromMillisecondsSinceEpoch(map['date'] as int) : null,
     );
   }
 
