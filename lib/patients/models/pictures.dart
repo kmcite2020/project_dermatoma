@@ -3,7 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:project_dermatoma/models/picture.dart';
+import 'package:project_dermatoma/patients/models/picture.dart';
 
 class PicturesModel {
   final List<PictureModel>? pictures;
@@ -29,7 +29,7 @@ class PicturesModel {
     return PicturesModel(
       pictures: map['pictures'] != null
           ? List<PictureModel>.from(
-              (map['pictures'] as List<int>).map<PictureModel?>(
+              (map['pictures']).map<PictureModel?>(
                 (x) => PictureModel.fromMap(x as Map<String, dynamic>),
               ),
             )

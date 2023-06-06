@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:project_dermatoma/pages/home_page.dart';
+import 'package:project_dermatoma/patients/home_page.dart';
 import 'package:project_dermatoma/shared/extensions.dart';
 import 'package:states_rebuilder/scr/state_management/rm.dart';
 
-import '../blocs/patients_bloc.dart';
+import '../themes/themes_bloc.dart';
+import 'patients_bloc.dart';
 
 class EditPatientPage extends ReactiveStatelessWidget {
   const EditPatientPage({super.key});
@@ -11,19 +12,22 @@ class EditPatientPage extends ReactiveStatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: 'Edit Patient'.text,
-        actions: const [
-          BackButton(),
-        ],
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(themeBloc.height),
+        child: AppBar(
+          automaticallyImplyLeading: false,
+          title: 'Edit Patient'.text(),
+          actions: const [
+            BackButton(),
+          ],
+        ),
       ),
       body: Wrap(
         children: [
           patientsBloc.currentPatientRM.onAll(
             onWaiting: () => const CircularProgressIndicator(),
             onError: (_, __) {
-              return Exception(_.toString()).text;
+              return Exception(_.toString()).text();
             },
             onData: (_) {
               return Text(
@@ -31,12 +35,17 @@ class EditPatientPage extends ReactiveStatelessWidget {
               );
             },
           ),
-          ElevatedButton(onPressed: () {}, child: 'child'.text),
+          ElevatedButton(
+            onPressed: () {},
+            child: 'child'.text(),
+          ),
           ElevatedButton(
               onPressed: () {
-                patientsBloc.updatePtient(patientsBloc.currentPatient!);
+                patientsBloc.updatePtient(
+                  patientsBloc.currentPatient!,
+                );
               },
-              child: 'Update'.text),
+              child: 'Update'.text()),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -44,7 +53,7 @@ class EditPatientPage extends ReactiveStatelessWidget {
           RM.navigate.to(const HomePage());
           patientsBloc.updatePtient(patientsBloc.currentPatient!);
         },
-        label: "Save".text,
+        label: "Save".text(),
         icon: const Icon(Icons.save),
       ),
     );

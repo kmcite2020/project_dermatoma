@@ -8,5 +8,5 @@ enum Site {
   hands,
   feet;
 
-  Site fromMap(int map) => Site.values[map];
+  static Site fromMap(int map) => Site.values[map];
 }

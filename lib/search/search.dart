@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:project_dermatoma/models/patient.dart';
-import 'package:project_dermatoma/pages/edit_patient_page.dart';
+import 'package:project_dermatoma/patients/edit_patient_page.dart';
+import 'package:project_dermatoma/patients/models/patient.dart';
 import 'package:project_dermatoma/shared/extensions.dart';
 import 'package:states_rebuilder/scr/state_management/rm.dart';
 
-import '../blocs/patients_bloc.dart';
+import '../patients/patients_bloc.dart';
 
 class SearchPage extends ReactiveStatelessWidget {
   const SearchPage({super.key});
@@ -23,9 +23,7 @@ class SearchPage extends ReactiveStatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {
-              searchFunction(currentSearchTextRM.text);
-            },
+            onPressed: () => searchFunction(currentSearchTextRM.text),
             icon: const Icon(Icons.search),
           ),
         ],
@@ -34,12 +32,12 @@ class SearchPage extends ReactiveStatelessWidget {
         children: [
           for (final eachPatient in searchRM.state)
             ListTile(
-              title: eachPatient.name.text,
+              title: eachPatient.name.text(),
               onTap: () {
                 // patientsBloc.currentPatient = eachPatient;
                 RM.navigate.to(const EditPatientPage());
               },
-            ).pad,
+            ).pad(),
         ],
       ),
     );

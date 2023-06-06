@@ -11,7 +11,11 @@ dependencies:
   hive_flutter:
   states_rebuilder:
   english_words:
+  google_fonts:
   flutter_native_splash:
+  file_picker:
+  flex_color_scheme:
+  uuid:
 dev_dependencies:
   flutter_test:
     sdk: flutter
